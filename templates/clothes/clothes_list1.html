@@ -1,0 +1,21 @@
+{% extends "base.html" %}
+{% block title %}All Clothes{% endblock %}
+
+{% block content %}
+<h1>All Clothes</h1>
+
+{% if clothes %}
+<ul>
+    {% for clothe in clothes %}
+    <li>
+        <img src="{{ clothe.image.url }}" alt="{{ clothe.name }}" style="width: 100px; height: 100px;">
+        <a href="{% url 'clothes:clothe_detail' clothe.pk %}">{{ clothe.name }}</a>
+    </li>
+    {% endfor %}
+</ul>
+{% else %}
+<p>No clothes available.</p>
+{% endif %}
+
+{% endblock %}
+

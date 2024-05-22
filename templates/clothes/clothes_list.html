@@ -1,0 +1,16 @@
+{% extends "base.html" %}
+{% block title %} Clothes {% endblock %}
+
+{% block content %}
+<h1>Clothes</h1>
+{% for clothe in clothes %}
+<div>
+    <a href="{% url 'clothes:clothe_detail' pk=clothe.pk %}">
+        <img src="{{ clothe.image.url }}" alt="{{ clothe.name }}" style="max-width: 200px; max-height: 200px;">
+        <br>
+        {{ clothe.name }}
+    </a>
+</div>
+<br><br>
+{% endfor %}
+{% endblock %}

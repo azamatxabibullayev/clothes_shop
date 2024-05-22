@@ -1,0 +1,379 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block title %} {% endblock %}</title>
+
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            text-decoration: none;
+            list-style: none;
+            font-family: 'Arial', sans-serif;
+        }
+        body {
+            background-color: #121212;
+            color: #e0e0e0;
+        }
+        .home-div {
+            background-color: #333;
+            height: 100px;
+            padding: 30px;
+            color: #e0e0e0;
+            font-size: 20px;
+            text-align: center;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+        footer {
+            background-color: #222;
+            color: #ccc;
+            height: 100px;
+            padding: 20px;
+            text-align: center;
+        }
+        .navbar {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 10px 0;
+            background-color: #1c1c1c;
+        }
+        .navbar nav {
+            display: flex;
+            align-items: center;
+        }
+        .header-ul {
+            display: flex;
+            justify-content: space-between;
+            width: 300px;
+        }
+        .header-ul li a {
+            color: #e0e0e0;
+            padding: 10px 20px;
+            transition: color 0.3s;
+        }
+        .header-ul li a:hover {
+            color: #1e90ff;
+        }
+        .inputt {
+            padding: 10px;
+            font-size: 17px;
+            border: 1px solid #444;
+            background: #222;
+            color: #e0e0e0;
+        }
+        .button-search {
+            padding: 10px;
+            background: #1e90ff;
+            color: white;
+            font-size: 17px;
+            border: 1px solid #444;
+            cursor: pointer;
+            transition: background 0.3s;
+        }
+        .button-search:hover {
+            background: #0056b3;
+        }
+        .auth-buttons {
+            background: none;
+            padding: 10px;
+            border-radius: 10px;
+            color: #e0e0e0;
+            font-size: 20px;
+            font-weight: 600;
+            text-align: center;
+            width: 150px;
+            margin: 10px;
+            border: 1px solid #444;
+            transition: background 0.3s, color 0.3s;
+        }
+        .auth-buttons:hover {
+            background-color: #1e90ff;
+            color: #fff;
+            cursor: pointer;
+        }
+        .message-m {
+            margin: 20px 0;
+            padding: 10px;
+            border-radius: 5px;
+            background-color: #333;
+        }
+        .messages {
+            list-style-type: none;
+            padding: 0;
+            margin: 0;
+        }
+        .messages li {
+            margin: 5px 0;
+            padding: 10px;
+            border-radius: 3px;
+        }
+        .messages li.success {
+            background-color: #4CAF50;
+        }
+        .messages li.error {
+            background-color: #F44336;
+        }
+        .messages li.warning {
+            background-color: #FF9800;
+        }
+        .messages li.info {
+            background-color: #2196F3;
+        }
+        .card-profile {
+            max-width: 300px;
+            margin: 20px auto;
+            padding: 20px;
+            border: 1px solid #444;
+            border-radius: 10px;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+            text-align: center;
+            background-color: #1c1c1c;
+        }
+        .card-profile img {
+            border-radius: 50%;
+            margin-bottom: 15px;
+        }
+        .card-profile h2 {
+            margin: 10px 0;
+            font-size: 24px;
+            color: #e0e0e0;
+        }
+        .card-profile h3 {
+            margin: 5px 0;
+            font-size: 18px;
+            color: #aaa;
+        }
+        .card-profile button {
+            margin-top: 20px;
+            padding: 10px 20px;
+            background-color: #1e90ff;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+        .card-profile button a {
+            color: white;
+            text-decoration: none;
+        }
+        .card-profile button:hover {
+            background-color: #0056b3;
+        }
+        .card {
+            background-color: #1c1c1c;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+            max-width: 250px;
+            text-align: center;
+            margin: 20px;
+        }
+        .cards {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-between;
+            align-items: center;
+            margin: 0 auto;
+            max-width: 1200px;
+            padding: 20px;
+        }
+        .card button {
+            border: none;
+            padding: 12px;
+            color: white;
+            background-color: #1e90ff;
+            cursor: pointer;
+            width: 100%;
+            border-bottom-left-radius: 10px;
+            border-bottom-right-radius: 10px;
+            transition: background-color 0.3s;
+        }
+        .card button:hover {
+            background-color: #0056b3;
+        }
+        .price {
+            margin: 10px;
+            color: #aaa;
+            font-size: 22px;
+        }
+        .carddd {
+            background-color: #1c1c1c;
+            border-radius: 10px;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+            padding: 20px;
+            max-width: 600px;
+            margin: 20px auto;
+            text-align: center;
+        }
+        .carddd h1 {
+            font-size: 24px;
+            color: #e0e0e0;
+            margin-bottom: 20px;
+        }
+        .carddd img.watch-img {
+            max-width: 100%;
+            height: auto;
+            border-radius: 10px;
+            margin-bottom: 20px;
+        }
+        .carddd h4 {
+            font-size: 18px;
+            color: #aaa;
+            margin: 10px 0;
+        }
+        .review-button, .add-review-btn, .delete-btn, .update-btn {
+            background-color: #1e90ff;
+            color: white;
+            border: none;
+            padding: 5px 10px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+        .review-button:hover, .add-review-btn:hover, .delete-btn:hover, .update-btn:hover {
+            background-color: #0056b3;
+        }
+        .review-item {
+            margin-bottom: 20px;
+        }
+        .review-user {
+            font-weight: bold;
+            margin-bottom: 5px;
+        }
+        .review-rating {
+            font-style: italic;
+            margin-bottom: 10px;
+        }
+        .review-comment {
+            margin-bottom: 10px;
+        }
+        form {
+            display: inline-block;
+        }
+        input[type="submit"] {
+            padding: 10px 20px;
+            font-size: 16px;
+            font-weight: bold;
+            color: white;
+            background-color: #dc3545;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+        input[type="submit"]:hover {
+            background-color: #c82333;
+        }
+        .watch-name {
+            font-size: 24px;
+            color: #e0e0e0;
+            margin-bottom: 20px;
+        }
+        .review-form {
+            margin-top: 20px;
+        }
+        .review-form label {
+            display: block;
+            margin-bottom: 10px;
+        }
+        .review-form input[type="text"],
+        .review-form textarea {
+            width: 100%;
+            padding: 8px;
+            margin-bottom: 15px;
+            border: 1px solid #444;
+            border-radius: 4px;
+            background: #222;
+            color: #e0e0e0;
+        }
+        .submit-btn {
+            background-color: #4CAF50;
+            color: white;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            margin-top: 20px;
+            transition: background-color 0.3s;
+        }
+        .submit-btn:hover {
+            background-color: #45a049;
+        }
+        .error-message {
+            color: red;
+            margin-top: 5px;
+        }
+        .add_review-center {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 60vh;
+        }
+        .center-content {
+            text-align: center;
+        }
+    </style>
+</head>
+<body>
+{% if messages %}
+<div class="message-m">
+    <ul class="messages">
+        {% for message in messages %}
+        <li
+                {% if message.tags %} class="{{ message.tags }}" {% endif %}>
+            {% if message.level == DEFAULT_MESSAGE_LEVELS.ERROR %}Important: {% endif %}
+            {{ message }}
+        </li>
+        {% endfor %}
+    </ul>
+</div>
+{% endif %}
+<header>
+    <div class="navbar">
+        <nav>
+            <ul class="header-ul">
+                <li><a href="{% url 'home:home_page' %}">Home</a></li>
+                <li><a href="{% url 'clothes:clothes_list1' %}">Clothes</a></li>
+                <li><a href="{% url 'clothes:category_products' %}">Categories</a></li>
+                <form action="{% url 'clothes:search_results' %}" method="GET" class="example-form">
+                    <input type="text" placeholder="Search.." name="q" class="inputt">
+                    <button type="submit" class="button-search">Search</button>
+            </ul>
+        </nav>
+        <div>
+            {% if request.user.is_authenticated %}
+            <a href="{% url 'users:profile' %}">
+                <button class="auth-buttons">Profile</button>
+            </a>
+            <a href="{% url 'users:logout' %}">
+                <button class="auth-buttons">Logout</button>
+            </a>
+            {% else %}
+            <a href="{% url 'users:register' %}">
+                <button class="auth-buttons">Register</button>
+            </a>
+            <a href="{% url 'users:login' %}">
+                <button class="auth-buttons">Login</button>
+            </a>
+            {% endif %}
+
+        </div>
+    </div>
+</header>
+
+{% block content %} {% endblock %}
+
+<footer>
+    <div class="footer">
+        <p>&copy; 2024 Your Company Name</p>
+    </div>
+</footer>
+</body>
+</html>

@@ -1,0 +1,50 @@
+{% extends "base.html" %}
+{% block title %}{{ clothe.name }}{% endblock %}
+
+{% block content %}
+<style>
+    /* Your styles here */
+</style>
+
+<div class="content">
+    <h1>{{ clothe.name }}</h1>
+    <img src="{{ clothe.image.url }}" alt="{{ clothe.name }}">
+    <h4>Category: {{ clothe.category }}</h4>
+    <h4>Description: {{ clothe.description }}</h4>
+    <h4>Price: ${{ clothe.price }}</h4>
+
+    <hr>
+
+    <h2>Reviews</h2>
+    <a href="{% url 'clothes:add_review' clothe.pk %}">Add Review</a>
+
+    {% for review in reviews %}
+    <div class="review">
+        <h4>{{ review.user.username }} | Rating: {{ review.rating }}</h4>
+        <p>{{ review.comment }}</p>
+        {% if user.is_authenticated and review.user == user %}
+        <form method="post" action="{% url 'clothes:review_delete' review.pk %}">
+            {% csrf_token %}
+            <button type="submit">Delete</button>
+        </form>
+        <button><a href="{% url 'clothes:review_update' review.pk  %}">Update</a></button>
+        {% endif %}
+    </div>
+    {% empty %}
+    <p class="no-reviews">No reviews yet.</p>
+    {% endfor %}
+
+    <hr>
+
+    <form method="post" action="{% url 'clothes:place_order' clothe.pk %}">
+        {% csrf_token %}
+        <label for="username">Username:</label>
+        <input type="text" id="username" name="username">
+
+        <label for="phone">Phone Number:</label>
+        <input type="text" id="phone" name="phone">
+
+        <button type="submit">Place Order</button>
+    </form>
+</div>
+{% endblock %}
